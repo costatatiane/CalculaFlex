@@ -132,6 +132,9 @@
                     app:lottie_rawRes="@raw/checkbox_animated" />
 
                 <TextView
+                    android:layout_marginTop="0dp"
+                    android:id="@+id/tvTerms"
+                    style="@style/link"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -145,14 +148,8 @@
 
             <Button
                 android:id="@+id/btCreateAccount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shape_button"
                 android:text="@string/button_create_account"
-                android:textAllCaps="false"
-                android:textColor="#FFF"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                style="@style/button"/>
 
             <TextView
                 android:id="@+id/btLoginSignUp"

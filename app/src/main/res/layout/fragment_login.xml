@@ -44,7 +44,7 @@
         app:layout_constraintBottom_toTopOf="@+id/tvResetPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSubTitleSignUp">
+        app:layout_constraintTop_toBottomOf="@+id/tvSubTitleLogin">
 
 
         <LinearLayout style="@style/container_edit_text">
@@ -54,7 +54,7 @@
                 android:text="@string/label_email" />
 
             <EditText
-                android:id="@+id/etUserNameSignUp"
+                android:id="@+id/etEmailLogin"
                 style="@style/field_edit_text"
                 tools:text="heiderlopes@apps.com.br" />
 
@@ -67,7 +67,7 @@
                 android:text="@string/label_password" />
 
             <EditText
-                android:id="@+id/etPhoneSignUp"
+                android:id="@+id/etPasswordLogin"
                 style="@style/field_edit_text"
                 android:inputType="textPassword"
                 tools:text="heiderlopes@apps.com.br" />
@@ -75,19 +75,13 @@
 
         <Button
             android:id="@+id/btLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_button"
             android:text="@string/button_login"
-            android:textAllCaps="false"
-            android:textColor="#FFF"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            style="@style/button"/>
 
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tvSubTitleSignUp"
+        android:id="@+id/tvSubTitleLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login_subtitle"

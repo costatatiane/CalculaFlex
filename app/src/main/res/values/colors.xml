@@ -9,6 +9,10 @@
     <color name="secondaryTextColor">#9EB0BC</color>
     <color name="backgroundComponentColor">#F2F4F6</color>
 
+    <color name="backgroundButtonDisabled">#F2F4F6</color>
+    <color name="backgroundButton">@color/secondaryBackground</color>
+    <color name="backgroundButtonPressed">#6698BC</color>
+
     <color name="headerTextColor">#FFF</color>
 
     <color name="home_navigation_background">#214966</color>
