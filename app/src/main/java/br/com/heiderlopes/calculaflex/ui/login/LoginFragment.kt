@@ -17,6 +17,8 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 
 import br.com.heiderlopes.calculaflex.R
+import br.com.heiderlopes.calculaflex.exceptions.EmailInvalidException
+import br.com.heiderlopes.calculaflex.exceptions.PasswordInvalidException
 import br.com.heiderlopes.calculaflex.models.RequestState
 import br.com.heiderlopes.calculaflex.ui.base.BaseFragment
 
@@ -63,14 +65,27 @@ class LoginFragment : BaseFragment() {
 
     private fun showSuccess() {
         hideLoading()
-        showMessage("Deu certo")
-//        NavHostFragment.findNavController(this)
-//            .navigate(R.id.action)
+        NavHostFragment.findNavController(this)
+            .navigate(R.id.action_loginFragment_to_main_nav_graph)
     }
 
     private fun showError(throwable: Throwable) {
         hideLoading()
         showMessage(throwable.message)
+
+        etEmailLogin.error = null
+        etPasswordLogin.error = null
+        when(throwable) {
+            is EmailInvalidException -> {
+                etEmailLogin.error = throwable.message
+                etEmailLogin.requestFocus()
+            }
+            is PasswordInvalidException -> {
+                etPasswordLogin.error = throwable.message
+                etPasswordLogin.requestFocus()
+            }
+            else -> showMessage(throwable.message)
+        }
     }
 
     private fun setUpView(view: View) {

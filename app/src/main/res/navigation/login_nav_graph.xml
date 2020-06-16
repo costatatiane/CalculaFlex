@@ -8,5 +8,10 @@
         android:id="@+id/loginFragment"
         android:name="br.com.heiderlopes.calculaflex.ui.login.LoginFragment"
         android:label="LoginFragment"
-        tools:layout="@layout/fragment_login"/>
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_main_nav_graph"
+            app:destination="@id/main_nav_graph" />
+    </fragment>
+    <include app:graph="@navigation/main_nav_graph" />
 </navigation>

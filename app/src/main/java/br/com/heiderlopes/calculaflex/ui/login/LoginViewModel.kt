@@ -1,5 +1,7 @@
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import br.com.heiderlopes.calculaflex.exceptions.EmailInvalidException
+import br.com.heiderlopes.calculaflex.exceptions.PasswordInvalidException
 import br.com.heiderlopes.calculaflex.models.RequestState
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -31,17 +33,17 @@ class LoginViewModel : ViewModel() {
     private fun validateFields(email: String, password: String): Boolean {
 
         if(email.isEmpty()) {
-            loginState.value = RequestState.Error(Throwable("E-mail não pode ser vazio"))
+            loginState.value = RequestState.Error(EmailInvalidException())
             return false
         }
 
         if(password.isEmpty()) {
-            loginState.value = RequestState.Error(Throwable("Senha não pode ser vazia"))
+            loginState.value = RequestState.Error(PasswordInvalidException("Senha não pode ser vazia"))
             return false
         }
 
         if(password.length < 6) {
-            loginState.value = RequestState.Error(Throwable("Senha tem que ter pelo menos 6 caracteres"))
+            loginState.value = RequestState.Error(PasswordInvalidException("Senha tem que ter pelo menos 6 caracteres"))
             return false
         }
 
