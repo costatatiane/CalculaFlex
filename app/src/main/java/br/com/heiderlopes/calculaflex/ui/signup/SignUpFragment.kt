@@ -5,20 +5,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.navigation.fragment.findNavController
 
 import br.com.heiderlopes.calculaflex.R
+import br.com.heiderlopes.calculaflex.ui.base.BaseFragment
 
-/**
- * A simple [Fragment] subclass.
- */
-class SignUpFragment : Fragment() {
+class SignUpFragment : BaseFragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sign_up, container, false)
+    override val layout = R.layout.fragment_sign_up
+
+    private lateinit var tvTerms: TextView
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        tvTerms = view.findViewById(R.id.tvTerms)
+        tvTerms.setOnClickListener {
+            findNavController()
+                .navigate(R.id.action_signUpFragment_to_termsFragment)
+        }
     }
 
 }

@@ -15,6 +15,7 @@ import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 
 import br.com.heiderlopes.calculaflex.R
 import br.com.heiderlopes.calculaflex.exceptions.EmailInvalidException
@@ -61,6 +62,17 @@ class LoginFragment : BaseFragment() {
                 is RequestState.Loading -> showLoading("Realizando autenticação")
             }
         })
+
+        loginViewModel.resetPasswordState.observe(viewLifecycleOwner, Observer {
+            when(it) {
+                is RequestState.Success -> {
+                    hideLoading()
+                    showMessage(it.data)
+                }
+                is RequestState.Error -> showError(it.throwable)
+                is RequestState.Loading -> showLoading("Reenviando e-mail para troca de senha")
+            }
+        })
     }
 
     private fun showSuccess() {
@@ -103,6 +115,16 @@ class LoginFragment : BaseFragment() {
                 etEmailLogin.text.toString(),
                 etPasswordLogin.text.toString()
             )
+        }
+
+        tvResetPassword.setOnClickListener {
+            loginViewModel.resetPassword(
+                etEmailLogin.text.toString()
+            )
+        }
+
+        tvNewAccount.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
         }
     }
 
