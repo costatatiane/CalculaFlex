@@ -6,11 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.NavHostFragment
 import br.com.heiderlopes.calculaflex.R
+import br.com.heiderlopes.calculaflex.firebase.RemoteConfigUtils
 
 class SplashFragment : Fragment() {
 
@@ -29,22 +31,38 @@ class SplashFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setUpView(view)
+        startAnimation()
+
+        updateRemoteConfig()
+    }
+    private fun updateRemoteConfig() {
         Handler().postDelayed({
-
-            val extras = FragmentNavigatorExtras(
-                ivLogoApp to "logoApp",
-                tvAppName to "textApp"
-            )
-
-            NavHostFragment.findNavController(this)
-                .navigate(R.id.action_splashFragment_to_login_nav_graph, null, null, extras)
-
+            RemoteConfigUtils.fetchAndActivate()
+                .addOnCompleteListener {
+                    nextScreen()
+                }
         }, 2000)
     }
 
     private fun setUpView(view: View) {
         ivLogoApp = view.findViewById(R.id.ivLogoApp)
         tvAppName = view.findViewById(R.id.tvAppName)
+    }
+
+    private fun nextScreen() {
+        val extras = FragmentNavigatorExtras(
+            ivLogoApp to "logoApp",
+            tvAppName to "textApp"
+        )
+        NavHostFragment.findNavController(this)
+            .navigate(
+                R.id.action_splashFragment_to_login_nav_graph,
+                null, null, extras
+            )
+    }
+
+    private fun startAnimation() {
+
     }
 
 
